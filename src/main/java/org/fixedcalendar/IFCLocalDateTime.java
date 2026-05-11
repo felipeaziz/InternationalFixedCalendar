@@ -1,6 +1,5 @@
 package org.fixedcalendar;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,7 +23,6 @@ import java.util.Objects;
  */
 public final class IFCLocalDateTime implements ChronoLocalDateTime<IFCDate>, Temporal, TemporalAdjuster, Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private final IFCDate date;

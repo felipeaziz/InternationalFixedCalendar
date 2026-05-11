@@ -1,6 +1,5 @@
 package org.fixedcalendar;
 
-import java.io.Serial;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -36,7 +35,6 @@ public final class IFCChronology extends AbstractChronology implements Serializa
     /**
      * Singleton instance of the International Fixed Chronology.
      */
-    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -310,7 +308,6 @@ public final class IFCChronology extends AbstractChronology implements Serializa
      * @return the singleton instance
      * @throws ObjectStreamException if an error occurs during deserialization
      */
-    @Serial
     private Object readResolve() throws ObjectStreamException {
         return INSTANCE;
     }

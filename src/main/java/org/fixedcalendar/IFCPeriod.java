@@ -7,6 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalUnit;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,7 +56,7 @@ public final class IFCPeriod implements ChronoPeriod {
      */
     @Override
     public List<TemporalUnit> getUnits() {
-        return List.of(ChronoUnit.YEARS, ChronoUnit.MONTHS, ChronoUnit.DAYS);
+        return Arrays.asList(ChronoUnit.YEARS, ChronoUnit.MONTHS, ChronoUnit.DAYS);
     }
 
     /**
@@ -118,7 +119,8 @@ public final class IFCPeriod implements ChronoPeriod {
      */
     @Override
     public IFCPeriod plus(TemporalAmount amountToAdd) {
-        if (amountToAdd instanceof IFCPeriod other) {
+        if (amountToAdd instanceof IFCPeriod) {
+            IFCPeriod other = (IFCPeriod) amountToAdd;
             return new IFCPeriod(this.years + other.years, this.months + other.months, this.days + other.days);
         }
         throw new DateTimeException("Only IFCPeriod can be added to IFCPeriod");
@@ -133,7 +135,8 @@ public final class IFCPeriod implements ChronoPeriod {
      */
     @Override
     public IFCPeriod minus(TemporalAmount amountToSubtract) {
-        if (amountToSubtract instanceof IFCPeriod other) {
+        if (amountToSubtract instanceof IFCPeriod) {
+            IFCPeriod other = (IFCPeriod) amountToSubtract;
             return new IFCPeriod(this.years - other.years, this.months - other.months, this.days - other.days);
         }
         throw new DateTimeException("Only IFCPeriod can be subtracted from IFCPeriod");

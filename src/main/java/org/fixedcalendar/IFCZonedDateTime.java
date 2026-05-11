@@ -1,6 +1,5 @@
 package org.fixedcalendar;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -19,7 +18,6 @@ import java.util.Objects;
  */
 public final class IFCZonedDateTime implements ChronoZonedDateTime<IFCDate>, Temporal, TemporalAdjuster, Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private final IFCLocalDateTime dateTime;

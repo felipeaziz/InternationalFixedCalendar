@@ -1,6 +1,5 @@
 package org.fixedcalendar;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
 import java.time.chrono.*;
@@ -15,7 +14,6 @@ import java.util.Objects;
  */
 public final class IFCDate implements ChronoLocalDate, Serializable {
     
-    @Serial
     private static final long serialVersionUID = 1L;
     private final LocalDate isoDate;
 
@@ -193,7 +191,8 @@ public final class IFCDate implements ChronoLocalDate, Serializable {
      */
     @Override
     public ValueRange range(TemporalField field) {
-        if (field instanceof ChronoField f) {
+        if (field instanceof ChronoField) {
+            ChronoField f = (ChronoField) field;
             if (isSupported(field)) {
                 switch (f) {
                     case DAY_OF_MONTH: return ValueRange.of(1, lengthOfMonth());
