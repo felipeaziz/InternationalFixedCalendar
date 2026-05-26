@@ -286,9 +286,9 @@ public final class IFCDate implements ChronoLocalDate, Serializable {
         if (unit instanceof ChronoUnit) {
             switch ((ChronoUnit) unit) {
                 case MONTHS:
-                    return plusDays(Math.multiplyExact(amountToAdd, 28));
+                    return plusDays(safeMultiply(amountToAdd, 28));
                 case WEEKS:
-                    return plusDays(Math.multiplyExact(amountToAdd, 7));
+                    return plusDays(safeMultiply(amountToAdd, 7));
                 case YEARS:
                     return from(isoDate.plusYears(amountToAdd));
                 default:
@@ -511,5 +511,27 @@ public final class IFCDate implements ChronoLocalDate, Serializable {
             return IFCDayOfWeek.INTERCALARY;
         }
         return IFCDayOfWeek.ofDayOfMonth(getDayOfMonth());
+    }
+
+    /**
+     * Multiplies two long values, checking for overflow.
+     *
+     * @param a the first value
+     * @param b the second value (int)
+     * @return the product
+     * @throws ArithmeticException if the result overflows a long
+     */
+    private static long safeMultiply(long a, int b) {
+        if (b == 0) {
+            return 0L;
+        }
+        if (a == 0) {
+            return 0L;
+        }
+        long result = a * b;
+        if (((a ^ result) & (b ^ result)) < 0) { // Check for overflow
+            throw new ArithmeticException("long overflow");
+        }
+        return result;
     }
 }
